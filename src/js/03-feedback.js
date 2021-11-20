@@ -12,17 +12,22 @@ form.addEventListener('input', throttle(evt => {
 }, 500));
 
 form.addEventListener('submit', evt => {
-  evt.preventDefault()
-  evt.currentTarget.reset();
-  localStorage.removeItem(FEEDBACK_FORM_STATE);
-});
+    evt.preventDefault()
+    console.log(data);
+
+    evt.currentTarget.reset();
+    localStorage.removeItem(FEEDBACK_FORM_STATE);
+}); 
+
 
 function setValuesElemForm() {
   const dataFromLs = JSON.parse(localStorage.getItem(FEEDBACK_FORM_STATE));
     if (dataFromLs) {
     data.email = dataFromLs.email;
     data.message = dataFromLs.message;
-    form.elements.email.value = data.email;
-    form.elements.message.value = data.message;
+    form.elements.email.value = dataFromLs.email;
+    form.elements.message.value = dataFromLs.message;
   } 
 }
+
+
