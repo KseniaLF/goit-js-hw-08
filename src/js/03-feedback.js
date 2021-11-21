@@ -2,22 +2,23 @@ import throttle from 'lodash.throttle';
 
 const FEEDBACK_FORM_STATE = 'feedback-form-state';
 const form = document.querySelector('.feedback-form');
-const data = { email: '', message: ''};
+let data = { email: '', message: ''};
 setValuesElemForm();
 
 form.addEventListener('input', throttle(evt => {
   data[evt.target.name] = evt.target.value;
-  localStorage.setItem(FEEDBACK_FORM_STATE, JSON.stringify(data),
-);
+  localStorage.setItem(FEEDBACK_FORM_STATE, JSON.stringify(data),);
 }, 500));
 
-form.addEventListener('submit', evt => {
-    evt.preventDefault()
-    console.log(data);
 
-    evt.currentTarget.reset();
-    localStorage.removeItem(FEEDBACK_FORM_STATE);
-}); 
+  form.addEventListener('submit', evt => {
+      evt.preventDefault()
+      console.log(data);
+
+    data = { email: '', message: '' };
+      evt.currentTarget.reset();
+      localStorage.removeItem(FEEDBACK_FORM_STATE);
+  }); 
 
 
 function setValuesElemForm() {
