@@ -11,14 +11,22 @@ form.addEventListener('input', throttle(evt => {
 }, 500));
 
 
-  form.addEventListener('submit', evt => {
-      evt.preventDefault()
-      console.log(data);
 
-    data = { email: '', message: '' };
-      evt.currentTarget.reset();
-      localStorage.removeItem(FEEDBACK_FORM_STATE);
-  }); 
+form.addEventListener('submit', evt => {
+  evt.preventDefault()
+  console.log(data);
+
+
+  if (!data.email || !data.message) {
+    alert("Все поля должны быть заполнены!");
+    return;
+  }
+
+  data = { email: '', message: '' };
+  evt.currentTarget.reset();
+  localStorage.removeItem(FEEDBACK_FORM_STATE);
+});
+
 
 
 function setValuesElemForm() {
@@ -30,5 +38,7 @@ function setValuesElemForm() {
     form.elements.message.value = dataFromLs.message;
   } 
 }
+
+
 
 
